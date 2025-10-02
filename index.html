@@ -6,52 +6,30 @@
     <title>Felices 8 Meses, Mi Amor</title>
     <style>
         /* Estilos generales y fuentes */
-        body {
-            font-family: 'Georgia', serif;
-            background-color: #fdefee;
-            color: #5c3b42;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
+        body { font-family: 'Georgia', serif; background-color: #fdefee; color: #5c3b42; margin: 0; padding: 0; overflow-x: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
         /* --- Pantalla de Carga --- */
-        #loader {
-            position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 9999;
-            background-color: #fdefee; display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.75s, visibility 0.75s;
-        }
+        #loader { position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 9999; background-color: #fdefee; display: flex; justify-content: center; align-items: center; transition: opacity 0.75s, visibility 0.75s; }
         .loader-heart { font-size: 100px; color: #d16b86; animation: heartbeat-loader 1.5s infinite; }
         @keyframes heartbeat-loader { 0%, 28%, 70% { transform: scale(1); } 14%, 42% { transform: scale(1.3); } }
         .loader-hidden { opacity: 0; visibility: hidden; }
-
         /* Contenedor principal */
-        .container {
-            max-width: 800px; margin: 40px auto; padding: 20px; background-color: #ffffff;
-            border-radius: 15px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); position: relative; z-index: 1;
-        }
-
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; background-color: #ffffff; border-radius: 15px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); position: relative; z-index: 1; }
         /* Encabezados de Sección (h2) */
         h2 { color: #d16b86; font-family: 'Parisienne', cursive; font-size: 2.5em; text-align: center; margin-bottom: 10px; }
-        @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
-
         /* Encabezado */
         header { text-align: center; padding-bottom: 20px; border-bottom: 2px dashed #f5c0c0; }
         h1 { color: #d16b86; font-size: 3em; font-family: 'Parisienne', cursive; animation: heartbeat 1.5s infinite; }
-
         /* Contador */
         .counter { background-color: #f5c0c0; color: white; text-align: center; padding: 15px; margin: 20px 0; border-radius: 10px; font-size: 1.2em; }
         .counter strong { font-size: 1.5em; }
-
         /* Carta */
         .letter { line-height: 1.8; text-align: justify; padding: 0 20px; }
-
         /* Galería */
         .gallery { margin-top: 40px; }
         .gallery-images { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
         .gallery-images img { width: 220px; height: 220px; object-fit: cover; border-radius: 10px; border: 5px solid white; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .gallery-images img:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(209, 107, 134, 0.3); }
-
         /* --- Estilos Juego Corazones --- */
         .game { margin-top: 40px; text-align: center; border-top: 2px dashed #f5c0c0; padding-top: 20px; }
         #game-area { width: 100%; max-width: 600px; height: 400px; background-color: #fdefee; border: 3px solid #f5c0c0; border-radius: 10px; margin: 20px auto; position: relative; overflow: hidden; }
@@ -62,29 +40,17 @@
         #start-button:hover { background-color: #c25975; }
         #game-controls { display: none; justify-content: space-between; width: 200px; margin: 15px auto 0; }
         .control-btn { width: 70px; height: 70px; font-size: 2.5em; color: white; background-color: #f5c0c0; border: none; border-radius: 50%; user-select: none; -webkit-user-select: none; touch-action: manipulation; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        
-        /* --- Estilos Juego Idle Tycoon --- */
-        .idle-game { margin-top: 40px; text-align: center; border-top: 2px dashed #f5c0c0; padding-top: 20px; }
-        #love-display { background-color: #fdefee; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-        #love-counter { font-size: 2.5em; color: #d16b86; margin: 0; }
-        #love-per-second { font-size: 1.1em; margin: 5px 0 0; }
-        #click-love-btn { width: 150px; height: 150px; font-size: 5em; color: #d16b86; background-color: transparent; border: 5px dashed #f5c0c0; border-radius: 50%; cursor: pointer; transition: transform 0.1s; }
-        #click-love-btn:active { transform: scale(0.9); }
-        #upgrades-container { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .upgrade { display: flex; justify-content: space-between; align-items: center; background-color: #fff; padding: 10px 15px; border: 2px solid #fdefee; border-radius: 8px; }
-        .upgrade-info { text-align: left; }
-        .upgrade-info strong { font-size: 1.2em; }
-        .buy-upgrade-btn { padding: 10px 15px; font-family: 'Georgia', serif; background-color: #f5c0c0; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        .buy-upgrade-btn:disabled { background-color: #ddd; cursor: not-allowed; }
-
+        /* --- NUEVO: Estilo para la tarjeta de enlace al juego idle --- */
+        .game-link-section { margin-top: 40px; text-align: center; border-top: 2px dashed #f5c0c0; padding-top: 20px; }
+        .game-link-card { background: linear-gradient(135deg, #fdefee, #fff); border: 2px solid #f5c0c0; border-radius: 10px; padding: 25px; max-width: 600px; margin: 20px auto; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .game-link-btn { display: inline-block; text-decoration: none; padding: 15px 35px; font-size: 1.2em; font-family: 'Georgia', serif; color: white; background-color: #d16b86; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; margin-top: 10px; box-shadow: 0 4px 15px rgba(209, 107, 134, 0.4); }
+        .game-link-btn:hover { background-color: #c25975; transform: translateY(-3px); box-shadow: 0 7px 20px rgba(209, 107, 134, 0.5); }
         /* Pie de página */
         footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px dashed #f5c0c0; font-style: italic; }
-
         /* Animación corazones flotantes */
         .heart { position: absolute; font-size: 20px; color: #d16b86; animation: floatUp 10s infinite linear; z-index: 0; }
         @keyframes floatUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100vh); opacity: 0; } }
         @keyframes heartbeat { 0%, 28%, 70% { transform: scale(1); } 14%, 42% { transform: scale(1.1); } }
-
         /* Diseño Responsivo */
         @media (max-width: 768px) {
             .container { margin: 20px 15px; padding: 15px; }
@@ -93,7 +59,6 @@
             .gallery-images img { width: 90%; height: auto; aspect-ratio: 1 / 1; }
             .letter { padding: 0 10px; }
             #game-area { height: 350px; }
-            .upgrade { flex-direction: column; align-items: stretch; gap: 10px; }
         }
     </style>
 </head>
@@ -143,16 +108,13 @@
             </div>
         </section>
         
-        <!-- Juego Idle Tycoon -->
-        <section class="idle-game">
+        <!-- NUEVO: Sección de enlace al juego idle -->
+        <section class="game-link-section">
             <h2>Juego: Construyendo Nuestro Amor</h2>
-            <p>Genera amor y compra recuerdos para crecer juntos.</p>
-            <div id="love-display">
-                <h3 id="love-counter">0</h3>
-                <p>Amor por segundo: <span id="love-per-second">0</span></p>
+            <div class="game-link-card">
+                <p>¿Crees que puedes cuantificar nuestro amor? ¡Demuéstralo en este juego donde cada clic y cada recuerdo construyen nuestro futuro juntos!</p>
+                <a href="idle-game.html" class="game-link-btn">Jugar a Construir Nuestro Amor</a>
             </div>
-            <button id="click-love-btn">❤</button>
-            <div id="upgrades-container"></div>
         </section>
         
         <footer>
@@ -166,7 +128,6 @@
             const loader = document.querySelector('#loader');
             setTimeout(() => {
                 loader.classList.add('loader-hidden');
-                loader.addEventListener('transitionend', () => { if (document.body.contains(loader)) document.body.removeChild(loader); });
             }, 2500);
 
             const bodyContainer = document.querySelector('body');
@@ -180,7 +141,7 @@
                 setTimeout(() => { heart.remove(); }, 10000);
             }, 500);
 
-            // --- Lógica del Juego "Atrapa Nuestro Amor" ---
+            // --- Lógica del Juego "Atrapa Nuestro Amor" (SIN CAMBIOS) ---
             const gameArea = document.getElementById('game-area');
             const player = document.getElementById('player');
             const scoreDisplay = document.getElementById('score');
@@ -196,17 +157,14 @@
             let score = 0, timeLeft = 30, highScore = 0;
             let gameInterval, heartInterval, moveInterval;
 
-            // Cargar récord al iniciar
             highScore = localStorage.getItem(HIGH_SCORE_KEY) || 0;
             highScoreDisplay.textContent = highScore;
             player.style.left = (gameArea.offsetWidth / 2 - player.offsetWidth / 2) + 'px';
 
             function movePlayer(direction) {
                 const playerLeft = parseInt(player.style.left);
-                const gameWidth = gameArea.offsetWidth;
-                const playerWidth = player.offsetWidth;
                 if (direction === 'left') player.style.left = Math.max(0, playerLeft - PLAYER_SPEED) + 'px';
-                if (direction === 'right') player.style.left = Math.min(gameWidth - playerWidth, playerLeft + PLAYER_SPEED) + 'px';
+                if (direction === 'right') player.style.left = Math.min(gameArea.offsetWidth - player.offsetWidth, playerLeft + PLAYER_SPEED) + 'px';
             }
 
             function createFallingHeart() {
@@ -277,99 +235,6 @@
             });
             ['mouseup', 'touchend'].forEach(evt => window.addEventListener(evt, stopMoving));
             startButton.addEventListener('click', startGame);
-
-            // --- Lógica del Juego "Idle Tycoon" ---
-            const loveCounter = document.getElementById('love-counter');
-            const lpsDisplay = document.getElementById('love-per-second');
-            const clickBtn = document.getElementById('click-love-btn');
-            const upgradesContainer = document.getElementById('upgrades-container');
-            const IDLE_SAVE_KEY = 'idleTycoonSave';
-
-            let love = 0;
-            let lovePerSecond = 0;
-            let upgrades = [
-                { id: 'hugs', name: 'Abrazos', cost: 15, baseCost: 15, count: 0, production: 0.1 },
-                { id: 'kisses', name: 'Besos', cost: 100, baseCost: 100, count: 0, production: 1 },
-                { id: 'letters', name: 'Cartas de Amor', cost: 1100, baseCost: 1100, count: 0, production: 8 },
-                { id: 'dates', name: 'Citas Especiales', cost: 12000, baseCost: 12000, count: 0, production: 47 },
-                { id: 'trips', name: 'Viajes Juntos', cost: 130000, baseCost: 130000, count: 0, production: 260 }
-            ];
-
-            function clickLove() {
-                love++;
-                updateDisplays();
-            }
-
-            function buyUpgrade(index) {
-                const upgrade = upgrades[index];
-                if (love >= upgrade.cost) {
-                    love -= upgrade.cost;
-                    upgrade.count++;
-                    upgrade.cost = Math.ceil(upgrade.baseCost * Math.pow(1.15, upgrade.count));
-                    calculateLPS();
-                    renderUpgrades();
-                    updateDisplays();
-                }
-            }
-            
-            function calculateLPS() {
-                lovePerSecond = upgrades.reduce((total, upg) => total + (upg.count * upg.production), 0);
-            }
-
-            function updateDisplays() {
-                loveCounter.textContent = Math.floor(love).toLocaleString();
-                lpsDisplay.textContent = lovePerSecond.toFixed(1).toLocaleString();
-                upgrades.forEach((upg, i) => {
-                    const btn = document.getElementById(`buy-${upg.id}`);
-                    if (btn) btn.disabled = love < upg.cost;
-                });
-            }
-
-            function renderUpgrades() {
-                upgradesContainer.innerHTML = '';
-                upgrades.forEach((upg, i) => {
-                    upgradesContainer.innerHTML += `
-                        <div class="upgrade">
-                            <div class="upgrade-info">
-                                <strong>${upg.name}</strong>
-                                <p>Tienes: ${upg.count} | Costo: ${upg.cost.toLocaleString()}</p>
-                            </div>
-                            <button id="buy-${upg.id}" class="buy-upgrade-btn" onclick="buyUpgrade(${i})">Comprar</button>
-                        </div>
-                    `;
-                });
-            }
-            
-            // --- Funciones de Guardado y Carga del Idle Game ---
-            function saveGame() {
-                const gameState = { love, upgrades };
-                localStorage.setItem(IDLE_SAVE_KEY, JSON.stringify(gameState));
-            }
-
-            function loadGame() {
-                const savedGame = localStorage.getItem(IDLE_SAVE_KEY);
-                if (savedGame) {
-                    const gameState = JSON.parse(savedGame);
-                    love = gameState.love;
-                    upgrades = gameState.upgrades;
-                }
-                calculateLPS();
-                renderUpgrades();
-                updateDisplays();
-            }
-            
-            // Inicializar el juego Idle
-            clickBtn.addEventListener('click', clickLove);
-            window.buyUpgrade = buyUpgrade; // Hacer la función accesible globalmente para el onclick
-            loadGame();
-
-            // Game Loop principal (actualiza amor y guarda)
-            setInterval(() => {
-                love += lovePerSecond / 10; // Dividimos para una actualización más suave
-                updateDisplays();
-            }, 100);
-
-            setInterval(saveGame, 5000); // Guardar cada 5 segundos
         });
     </script>
 </body>
