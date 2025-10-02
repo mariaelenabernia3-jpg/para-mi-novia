@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construyendo Nuestro Amor - Juego Idle</title>
+    <link rel="stylesheet" href="style-idle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="index.html" class="back-link" title="Volver a la carta">← Volver</a>
+    
+    <div class="game-container">
+        <!-- Columna Izquierda: Clicker y Estadísticas Principales -->
+        <section class="game-column main-stats-column">
+            <header class="main-header">
+                <h1>Construyendo Nuestro Amor</h1>
+                <div id="love-display">
+                    <h3 id="love-counter">0</h3>
+                    <p>Amor Total</p>
+                </div>
+                <p>Amor por segundo: <span id="love-per-second">0</span></p>
+            </header>
+            <div id="clicker-zone">
+                <button id="click-love-btn">❤</button>
+            </div>
+            <div class="prestige-info">
+                <p>Recuerdos Inolvidables: <span id="prestige-currency">0</span></p>
+                <p>Bonus Total: <span id="prestige-bonus">+0%</span></p>
+            </div>
+        </section>
+
+        <!-- Columna Central: Generadores (Upgrades) -->
+        <section class="game-column upgrades-column">
+            <h2>Generadores de Amor</h2>
+            <div id="upgrades-container"></div>
+        </section>
+
+        <!-- Columna Derecha: Momentos Especiales y Prestigio -->
+        <section class="game-column special-column">
+            <h2>Momentos Especiales</h2>
+            <div id="milestones-container"></div>
+            
+            <div class="prestige-container">
+                <h2>Renacer Nuestra Historia</h2>
+                <p>Cuando alcances <strong>1 Billón</strong> de Amor, podrás renacer para obtener Recuerdos Inolvidables y acelerar tu progreso permanentemente.</p>
+                <button id="prestige-btn" disabled>Renacer por <span id="prestige-gain">0</span> Recuerdos</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="script-idle.js"></script>
+</body>
+</html>
