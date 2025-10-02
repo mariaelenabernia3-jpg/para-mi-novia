@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felices 8 Meses, Mi Amor</title>
+    <style>
+        /* Estilos generales y fuentes */
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #fdefee; /* Un rosa muy pálido */
+            color: #5c3b42; /* Un tono marrón rojizo oscuro */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Evita el scroll horizontal */
+        }
+
+        /* --- Pantalla de Carga --- */
+        #loader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #fdefee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.75s, visibility 0.75s;
+        }
+
+        .loader-heart {
+            font-size: 100px;
+            color: #d16b86;
+            animation: heartbeat-loader 1.5s infinite;
+        }
+
+        @keyframes heartbeat-loader {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Encabezados de Sección (h2) */
+        h2 {
+            color: #d16b86;
+            font-family: 'Parisienne', cursive;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        /* Encabezado */
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #f5c0c0;
+        }
+
+        h1 {
+            color: #d16b86;
+            font-size: 3em;
+            font-family: 'Parisienne', cursive;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+        /* Contador de días */
+        .counter {
+            background-color: #f5c0c0;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 1.2em;
+        }
+        
+        .counter strong {
+            font-size: 1.5em;
+        }
+
+        /* Sección de la carta */
+        .letter {
+            line-height: 1.8;
+            text-align: justify;
+            padding: 0 20px;
+        }
+
+        /* Galería de fotos */
+        .gallery {
+            margin-top: 40px;
+        }
+
+        .gallery-images {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-images img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-images img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 30px rgba(209, 107, 134, 0.3);
+        }
+        
+        /* --- Sección del Videojuego --- */
+        .game {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        #game-area {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background-color: #fdefee;
+            border: 3px solid #f5c0c0;
+            border-radius: 10px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #player {
+            position: absolute;
+            bottom: 10px;
+            /* Se centrará inicialmente con JS */
+            width: 100px; 
+            height: 20px;
+            background-color: #d16b86;
+            border-radius: 10px;
+        }
+        
+        .falling-heart {
+            position: absolute;
+            font-size: 24px;
+            color: #d16b86;
+            user-select: none;
+        }
+
+        #game-info {
+            font-size: 1.2em;
+            color: #5c3b42;
+        }
+
+        #start-button {
+            padding: 10px 25px;
+            font-size: 1.1em;
+            font-family: 'Georgia', serif;
+            color: white;
+            background-color: #d16b86;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        #start-button:hover {
+            background-color: #c25975;
+        }
+
+        /* Controles para móvil */
+        #game-controls {
+            display: none; /* Ocultos por defecto */
+            justify-content: space-between;
+            width: 200px;
+            margin: 15px auto 0;
+        }
+
+        .control-btn {
+            width: 70px;
+            height: 70px;
+            font-size: 2.5em;
+            color: white;
+            background-color: #f5c0c0;
+            border: none;
+            border-radius: 50%; /* Botones redondos */
+            user-select: none; /* Evita selección de texto en móvil */
+            -webkit-user-select: none; /* Para Safari */
+            touch-action: manipulation; /* Mejora respuesta táctil */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Cierre o pie de página */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px dashed #f5c0c0;
+            font-style: italic;
+        }
+
+        /* --- Animación de Corazones Flotantes (Fondo) --- */
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #d16b86;
+            animation: floatUp 10s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        
+        /* Animación del latido para el título */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        /* --- Diseño Responsivo para Celulares --- */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px 15px;
+                padding: 15px;
+            }
+
+            h1 { font-size: 2.5em; }
+
+            .gallery-images {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gallery-images img {
+                width: 90%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
+            .letter { padding: 0 10px; }
+            
+            #game-area { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de Carga -->
+    <div id="loader">
+        <div class="loader-heart">❤</div>
+    </div>
+
+    <!-- Contenedor para los corazones que flotan -->
+    <div class="hearts-container"></div>
+
+    <div class="container">
+        <header>
+            <h1>Felices 8 Meses, Mi Vida</h1>
+            <p>Un pequeño regalo para la persona que ilumina mis días.</p>
+        </header>
+
+        <div class="counter">
+            Llevamos juntos <strong>243</strong> días maravillosos (¡y contando!)
+        </div>
+
+        <section class="letter">
+            <p>Mi amor,</p>
+            <p>Parece que fue ayer cuando empezamos esta aventura, y ya han pasado 8 meses. Cada día a tu lado es un regalo que no doy por sentado. Quería crear este pequeño rincón en internet solo para ti, para recordarte lo increíblemente especial que eres para mí y celebrar todo lo que hemos construido juntos.</p>
+            <p>Gracias por tus risas, por tu apoyo incondicional y por hacer de mi mundo un lugar mucho más bonito. Eres mi persona favorita, mi mejor amiga y el amor de mi vida.</p>
+            <p>Con todo mi amor,</p>
+            <p><strong>El amor de tu vida</strong></p>
+        </section>
+
+        <section class="gallery">
+            <h2>Nuestros Momentos</h2>
+            <div class="gallery-images">
+                <img src="juntos.jpg" alt="Recuerdo Bonito 1">
+                <img src="corazon.jpg" alt="Recuerdo Bonito 2">
+                <img src="ella.jpg" alt="Recuerdo Bonito 3">
+            </div>
+        </section>
+
+        <!-- Sección del Videojuego -->
+        <section class="game">
+            <h2>Un Juego Para Nosotros</h2>
+            <p>¡Atrapa todo nuestro amor!</p>
+            <div id="game-area">
+                <div id="player"></div>
+            </div>
+            <div id="game-info">
+                <p>Puntuación: <span id="score">0</span> | Tiempo: <span id="timer">30</span>s</p>
+                <button id="start-button">Jugar</button>
+            </div>
+            <!-- Controles para móvil -->
+            <div id="game-controls">
+                <button id="left-btn" class="control-btn">&larr;</button>
+                <button id="right-btn" class="control-btn">&rarr;</button>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Te amo más de lo que las palabras pueden expresar.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // --- Script para la Pantalla de Carga ---
+            const loader = document.querySelector('#loader');
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+                loader.addEventListener('transitionend', () => {
+                    if (document.body.contains(loader)) document.body.removeChild(loader);
+                });
+            }, 2500);
+
+            // --- Script para generar los corazones flotantes (Fondo) ---
+            const bodyContainer = document.querySelector('body');
+            function createFloatingHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                bodyContainer.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 10000);
+            }
+            setInterval(createFloatingHeart, 500);
+
+            // --- Lógica del Videojuego "Atrapa Nuestro Amor" ---
+            const gameArea = document.getElementById('game-area');
+            const player = document.getElementById('player');
+            const scoreDisplay = document.getElementById('score');
+            const timerDisplay = document.getElementById('timer');
+            const startButton = document.getElementById('start-button');
+            const controls = document.getElementById('game-controls');
+            const leftBtn = document.getElementById('left-btn');
+            const rightBtn = document.getElementById('right-btn');
+            
+            const PLAYER_SPEED = 8;
+            let score = 0;
+            let timeLeft = 30;
+            let gameInterval = null;
+            let heartInterval = null;
+            let moveInterval = null;
+
+            // Centrar al jugador al inicio
+            player.style.left = (gameArea.offsetWidth / 2 - player.offsetWidth / 2) + 'px';
+
+            function movePlayer(direction) {
+                const playerLeft = parseInt(player.style.left);
+                const gameWidth = gameArea.offsetWidth;
+                const playerWidth = player.offsetWidth;
+
+                if (direction === 'left' && playerLeft > 0) {
+                    player.style.left = Math.max(0, playerLeft - PLAYER_SPEED) + 'px';
+                }
+                if (direction === 'right' && playerLeft < (gameWidth - playerWidth)) {
+                    player.style.left = Math.min(gameWidth - playerWidth, playerLeft + PLAYER_SPEED) + 'px';
+                }
+            }
+
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.classList.add('falling-heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * (gameArea.offsetWidth - 30) + 'px';
+                heart.style.top = '-30px';
+                gameArea.appendChild(heart);
+                animateHeart(heart);
+            }
+
+            function animateHeart(heart) {
+                let speed = Math.random() * 3 + 2;
+                function fall() {
+                    const heartTop = parseInt(heart.style.top, 10);
+                    if (heartTop > gameArea.offsetHeight) {
+                        heart.remove();
+                        return;
+                    }
+                    heart.style.top = (heartTop + speed) + 'px';
+
+                    const playerRect = player.getBoundingClientRect();
+                    const heartRect = heart.getBoundingClientRect();
+                    if (
+                        heartRect.bottom > playerRect.top &&
+                        heartRect.top < playerRect.bottom &&
+                        heartRect.left < playerRect.right &&
+                        heartRect.right > playerRect.left
+                    ) {
+                        heart.remove();
+                        score++;
+                        scoreDisplay.textContent = score;
+                    } else {
+                        requestAnimationFrame(fall);
+                    }
+                }
+                requestAnimationFrame(fall);
+            }
+
+            function startGame() {
+                score = 0;
+                timeLeft = 30;
+                scoreDisplay.textContent = score;
+                timerDisplay.textContent = timeLeft;
+                startButton.style.display = 'none';
+                controls.style.display = 'flex'; // Mostrar controles
+
+                heartInterval = setInterval(createHeart, 800);
+                gameInterval = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.textContent = timeLeft;
+                    if (timeLeft <= 0) endGame();
+                }, 1000);
+            }
+
+            function endGame() {
+                clearInterval(gameInterval);
+                clearInterval(heartInterval);
+                clearInterval(moveInterval); // Asegurarse de detener el movimiento
+                alert(`¡Juego terminado! Atrapaste ${score} corazones. ¡Nuestro amor es inmenso!`);
+                
+                startButton.style.display = 'block';
+                controls.style.display = 'none'; // Ocultar controles
+                document.querySelectorAll('.falling-heart').forEach(h => h.remove());
+            }
+
+            // --- Event Listeners para los botones de control ---
+            const startMoving = (direction) => {
+                if (moveInterval) clearInterval(moveInterval); // Limpiar cualquier intervalo previo
+                moveInterval = setInterval(() => movePlayer(direction), 20);
+            };
+
+            const stopMoving = () => {
+                clearInterval(moveInterval);
+            };
+
+            // Eventos para el botón izquierdo
+            leftBtn.addEventListener('mousedown', () => startMoving('left'));
+            leftBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startMoving('left'); });
+            
+            // Eventos para el botón derecho
+            rightBtn.addEventListener('mousedown', () => startMoving('right'));
+            rightBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startMoving('right'); });
+            
+            // Eventos para detener el movimiento
+            window.addEventListener('mouseup', stopMoving);
+            window.addEventListener('touchend', stopMoving);
+
+            startButton.addEventListener('click', startGame);
+        });
+    </script>
+</body>
+</html>
